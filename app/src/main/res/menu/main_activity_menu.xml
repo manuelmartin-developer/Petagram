@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:petagram="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/top5"
+        android:icon="@drawable/icono_barra"
+        android:title="Top 5"
+        petagram:showAsAction="ifRoom"
+        android:iconTint="@color/white"
+        />
+
+</menu>

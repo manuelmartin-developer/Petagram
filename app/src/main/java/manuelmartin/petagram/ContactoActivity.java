@@ -40,8 +40,8 @@ public class ContactoActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.toolBar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        correo = "mmartindj@gmail.com";
-        pass = "Pa1tricia79#";
+        correo = "correo desde el que se envía";
+        pass = "contraseña del correo";
 
 
         etNombre = findViewById(R.id.etNombre);
@@ -86,7 +86,9 @@ public class ContactoActivity extends AppCompatActivity {
                          etNombre.setText("");
                          etEmail.setText("");
                          etMensaje.setText("");
-                    }
+                    }else {
+                         Toast.makeText(ContactoActivity.this, "El correo electrónico para envío se encuentra desactivado.", Toast.LENGTH_LONG).show();
+                     }
 
                 }catch (Exception e){
                     e.getMessage();

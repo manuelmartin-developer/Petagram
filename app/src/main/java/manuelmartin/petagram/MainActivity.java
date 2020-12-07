@@ -1,26 +1,34 @@
 package manuelmartin.petagram;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import manuelmartin.petagram.adapter.PageAdapter;
+import manuelmartin.petagram.fragment.PerfilFragment;
+import manuelmartin.petagram.fragment.RecyclerViewFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     // Declaración de objetos y variables
 
-    ArrayList<Mascota> mascotas;
-    private RecyclerView listaMascotas;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+
     private Mascota mascota;
 
     @Override
@@ -28,20 +36,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listaMascotas = findViewById(R.id.rvMascotas);
+        toolbar = findViewById(R.id.toolBar);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        setUpViewPager();
 
-        listaMascotas.setLayoutManager(linearLayoutManager);
-        inicializarListaMascotas();
-        inicializarAdaptador();
+        if (toolbar!=null){
+            setSupportActionBar(toolbar);
+        }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Menú Opciones
+        getMenuInflater().inflate(R.menu.menu_opciones, menu);
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
+
+
 
     }
 
@@ -51,41 +68,49 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.top5:
                 abrirTop5();
+                break;
+
+            case R.id.mContacto:
+                Intent intent = new Intent(this, ContactoActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.mAcercade:
+                Intent intent2 = new Intent(this, AcercaActivity.class);
+                startActivity(intent2);
 
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void inicializarListaMascotas(){
 
-        mascotas = new ArrayList<Mascota>();
-
-        mascotas.add(new Mascota(R.drawable.gato, "Fluffy", 3));
-        mascotas.add(new Mascota(R.drawable.gato2, "SnowBall", 1));
-        mascotas.add(new Mascota(R.drawable.husky, "Rocky", 6));
-        mascotas.add(new Mascota(R.drawable.mapache, "Thief", 4));
-        mascotas.add(new Mascota(R.drawable.caniche, "Lanitas", 8));
-        mascotas.add(new Mascota(R.drawable.cerdito, "Babe", 5));
-
-
-    }
-
-    public void inicializarAdaptador (){
-
-        Adaptador adaptador = new Adaptador(mascotas);
-        listaMascotas.setAdapter(adaptador);
-    }
 
     public void abrirTop5(){
-        Intent intent = new Intent(this, Top5.class);
+        Intent intent = new Intent(getApplicationContext(), Top5.class);
 
         startActivity(intent);
     }
 
-    public ArrayList obtenerMascotas(){
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments = new ArrayList<>();
 
-        return mascotas;
+        fragments.add(new RecyclerViewFragment());
+        fragments.add(new PerfilFragment());
+
+        return fragments;
     }
+
+    private void setUpViewPager(){
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments(),2));
+        tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.fragment1);
+        tabLayout.getTabAt(1).setIcon(R.drawable.fragment2);
+    }
+
+
+
+
 
 }

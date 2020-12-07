@@ -3,7 +3,7 @@
     xmlns:petagram="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/top5"
-        android:icon="@drawable/icono_barra"
+        android:icon="@drawable/estrella"
         android:title="Top 5"
         petagram:showAsAction="ifRoom"
         android:iconTint="@color/white"

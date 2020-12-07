@@ -1,6 +1,5 @@
 package manuelmartin.petagram;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,22 +8,23 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+import manuelmartin.petagram.adapter.Adaptador;
+
 public class Top5 extends AppCompatActivity {
 
     // Declaración de objetos y variables
 
     ArrayList<Mascota> mascotas;
     private RecyclerView listaMascotas;
-    private Mascota mascota;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top5);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.drawable.ic_launcher_background);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(findViewById(R.id.toolBar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         listaMascotas = findViewById(R.id.rvMascotas);

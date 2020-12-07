@@ -5,4 +5,9 @@
     <dimen name="marginLeft">10dp</dimen>
     <dimen name="space">200dp</dimen>
     <dimen name="btnLike">38dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="sizeTextContacto">20sp</dimen>
+    <dimen name="heightEditText">20dp</dimen>
+    <dimen name="sizeTextButton">20sp</dimen>
+    <dimen name="heightMensaje">150dp</dimen>
 </resources>

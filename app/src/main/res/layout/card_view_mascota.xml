@@ -30,40 +30,53 @@
             android:layout_margin="@dimen/marginLeft"
             >
 
-            <ImageButton
-                android:id="@+id/btnLike"
-                android:layout_width="@dimen/btnLike"
-                android:layout_height="@dimen/btnLike"
-                android:background="@drawable/huesovacio"/>
-            <TextView
-                android:id="@+id/tvNombre"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sizeNombre"
-                android:layout_marginLeft="@dimen/marginLeft"
-                android:textStyle="bold"
-                android:text="Fluffy"
-                />
-            <Space
-                android:layout_width="@dimen/space"
-                android:layout_height="match_parent"
-                />
+                android:layout_gravity="left"
+                android:orientation="horizontal"
+                >
+                <ImageButton
+                    android:id="@+id/btnLike"
+                    android:layout_width="@dimen/btnLike"
+                    android:layout_height="@dimen/btnLike"
+                    android:background="@drawable/huesovacio"/>
+                <TextView
+                    android:id="@+id/tvNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sizeNombre"
+                    android:layout_marginLeft="@dimen/marginLeft"
+                    android:textStyle="bold"
+                    android:text="Fluffy"
+                    />
 
-            <TextView
-                android:id="@+id/numberBones"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sizeNombre"
-                android:layout_marginRight="@dimen/marginLeft"
+                android:layout_gravity="left"
+                android:orientation="horizontal"
                 android:gravity="right"
-                android:text="5"/>
-            <ImageView
-                android:id="@+id/huesoLleno"
-                android:layout_width="@dimen/btnLike"
-                android:layout_height="@dimen/btnLike"
-                android:src="@drawable/huesolleno"
-                android:gravity="center_vertical"
-                />
+                >
+
+                <TextView
+                    android:id="@+id/numberBones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sizeNombre"
+                    android:layout_marginRight="@dimen/marginLeft"
+                    android:gravity="right"
+                    android:text="5"/>
+                <ImageView
+                    android:id="@+id/huesoLleno"
+                    android:layout_width="@dimen/btnLike"
+                    android:layout_height="@dimen/btnLike"
+                    android:src="@drawable/huesolleno"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

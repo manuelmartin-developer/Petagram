@@ -1,9 +1,8 @@
-package manuelmartin.petagram;
+package manuelmartin.petagram.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import manuelmartin.petagram.Mascota;
+import manuelmartin.petagram.R;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder> {
 
@@ -52,8 +54,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder
 
     public static class MascotasViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgfoto;
-        private TextView tvNombre, numberBones;
+        private final ImageView imgfoto;
+        private final TextView tvNombre;
+        private final TextView numberBones;
 
         public MascotasViewHolder(@NonNull View itemView) {
             super(itemView);

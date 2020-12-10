@@ -4,10 +4,14 @@ public class Mascota {
 
     // Declaracion de variables
     private String nombre;
-    private int foto, likes;
+    private int foto, likes, id;
 
 
     // Método Constructor
+
+    public Mascota(){
+
+    }
 
     public Mascota(String nombre, int likes){
 
@@ -47,6 +51,14 @@ public class Mascota {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Método toString()

@@ -1,10 +1,13 @@
 package manuelmartin.petagram.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,10 +16,12 @@ import java.util.ArrayList;
 
 import manuelmartin.petagram.Mascota;
 import manuelmartin.petagram.R;
+import manuelmartin.petagram.db.ConstructorMascotas;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder> {
 
     // Declaración de variables y objetos
+    private Activity activity;
     ArrayList <Mascota> mascotas;
 
     // Método Constructor
@@ -40,9 +45,21 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder
 
         mascotasViewHolder.imgfoto.setImageResource(mascota.getFoto());
         mascotasViewHolder.tvNombre.setText(mascota.getNombre());
-        mascotasViewHolder.numberBones.setText(String.valueOf(mascota.getLikes()));
+        mascotasViewHolder.tvLikes.setText(String.valueOf(mascota.getLikes()));
 
+        mascotasViewHolder.btnLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Toast.makeText(activity, "Has dado like a " + mascota.getNombre(), Toast.LENGTH_SHORT).show();
+
+                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+                constructorMascotas.darLikeMascota(mascota);
+
+                mascotasViewHolder.tvLikes.setText(String.valueOf(constructorMascotas.obtenerLikesMascota(mascota)));
+
+            }
+        });
     }
 
     // Devuelve la cantidad de elementos que contiene la lista
@@ -56,14 +73,16 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder
 
         private final ImageView imgfoto;
         private final TextView tvNombre;
-        private final TextView numberBones;
+        private final TextView tvLikes;
+        private final ImageButton btnLikes;
 
         public MascotasViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgfoto = itemView.findViewById(R.id.imgFoto);
-            tvNombre = itemView.findViewById(R.id.tvNombre);
-            numberBones = itemView.findViewById(R.id.numberBones);
+            imgfoto     = itemView.findViewById(R.id.imgFoto);
+            tvNombre    = itemView.findViewById(R.id.tvNombre);
+            tvLikes     = itemView.findViewById(R.id.tvLikes);
+            btnLikes    = itemView.findViewById(R.id.btnLike);
 
         }
     }

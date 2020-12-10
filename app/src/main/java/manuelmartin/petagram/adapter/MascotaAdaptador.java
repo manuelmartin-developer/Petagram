@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import manuelmartin.petagram.Mascota;
+import manuelmartin.petagram.pojo.Mascota;
 import manuelmartin.petagram.R;
 import manuelmartin.petagram.db.ConstructorMascotas;
 
-public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder> {
+public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.MascotasViewHolder> {
 
     // Declaración de variables y objetos
     private Activity activity;
@@ -26,8 +26,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder
 
     // Método Constructor
 
-    public Adaptador(ArrayList <Mascota> mascotas){
+    public MascotaAdaptador(ArrayList <Mascota> mascotas, Activity activity){
         this.mascotas=mascotas;
+        this.activity= activity;
     }
 
 
@@ -57,7 +58,6 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MascotasViewHolder
                 constructorMascotas.darLikeMascota(mascota);
 
                 mascotasViewHolder.tvLikes.setText(String.valueOf(constructorMascotas.obtenerLikesMascota(mascota)));
-
             }
         });
     }

@@ -5,7 +5,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import manuelmartin.petagram.Mascota;
+import manuelmartin.petagram.pojo.Mascota;
 import manuelmartin.petagram.R;
 
 public class ConstructorMascotas {
@@ -77,5 +77,14 @@ public class ConstructorMascotas {
         return db.obtenerLikesMascota(mascota);
 
     }
+
+    public ArrayList<Mascota> obtenerMascotasFavoritas(){
+        ArrayList<Mascota> mascotas = new ArrayList<>();
+
+        BaseDatos db = new BaseDatos(context);
+        mascotas = db.obtenerMascotasFavoritas();
+        return mascotas;
+    }
+
 
 }

@@ -1,10 +1,10 @@
-package manuelmartin.petagram;
+package manuelmartin.petagram.pojo;
 
 public class Mascota {
 
     // Declaracion de variables
-    private String nombre;
-    private int foto, likes, id;
+    private String nombre, id;
+    private int foto, likes;
 
 
     // Método Constructor
@@ -53,11 +53,11 @@ public class Mascota {
         this.likes = likes;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

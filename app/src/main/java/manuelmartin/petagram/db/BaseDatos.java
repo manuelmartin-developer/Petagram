@@ -3,16 +3,14 @@ package manuelmartin.petagram.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import manuelmartin.petagram.Mascota;
+import manuelmartin.petagram.pojo.Mascota;
 
 
 public class BaseDatos extends SQLiteOpenHelper {
@@ -58,7 +56,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     public ArrayList<Mascota> obtenerTodasLasMascotas(){
 
-        ArrayList<Mascota> contactos = new ArrayList<>();
+        ArrayList<Mascota> mascotas = new ArrayList<>();
 
         String query = "SELECT * FROM " + ConstantesBaseDatos.TABLE_PETS;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -68,30 +66,64 @@ public class BaseDatos extends SQLiteOpenHelper {
         while (registros.moveToNext()){
             Mascota mascotaActual = new Mascota();
 
-            mascotaActual.setId(registros.getInt(0));
+            mascotaActual.setId(registros.getString(0));
             mascotaActual.setNombre(registros.getString(1));
             mascotaActual.setFoto(registros.getInt(2));
 
-            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_PET_NUMERO_LIKES+") as likes " +
-                    " FROM " + ConstantesBaseDatos.TABLE_LIKES_PET + " WHERE " + ConstantesBaseDatos.TABLE_LIKES_PET_ID_MASCOTA +
-                    "=" + mascotaActual.getId();
+            mascotas.add(mascotaActual);
 
-            Cursor registrosLikes = db.rawQuery(queryLikes, null);
-            if(registrosLikes.moveToNext()){
-
-                mascotaActual.setLikes(registrosLikes.getInt(0));
-
+            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_PET_NUMERO_LIKES + ") as likes " +
+                    " FROM " + ConstantesBaseDatos.TABLE_LIKES_PET +
+                    " WHERE " + ConstantesBaseDatos.TABLE_LIKES_PET_ID_MASCOTA + "=" + mascotaActual.getId();
+            Cursor registroLikes = db.rawQuery(queryLikes, null);
+            if(registroLikes.moveToNext()) {
+                mascotaActual.setLikes(registroLikes.getInt(0));
             }else{
                 mascotaActual.setLikes(0);
             }
-
-            contactos.add(mascotaActual);
-
         }
         db.close();
-        return contactos;
+        return mascotas;
 
     }
+
+    public ArrayList<Mascota> obtenerMascotasFavoritas(){
+        ArrayList<Mascota> mascotas = new ArrayList<>();
+
+        String query = "SELECT m.*, (SELECT COUNT("+ConstantesBaseDatos.TABLE_LIKES_PET_NUMERO_LIKES+")"+
+                " FROM "+ConstantesBaseDatos.TABLE_LIKES_PET+
+                " WHERE "+ConstantesBaseDatos.TABLE_LIKES_PET_ID_MASCOTA+"=m.id) as likes"+
+                " FROM "+ConstantesBaseDatos.TABLE_PETS+" m"+
+                " ORDER BY likes DESC"+
+                " LIMIT 5";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query,null);
+
+        while (registros.moveToNext()){
+            Mascota mascotaActual = new Mascota();
+            mascotaActual.setId(String.valueOf(registros.getInt(0)));
+            mascotaActual.setNombre(registros.getString(1));
+            mascotaActual.setFoto(registros.getInt(2));
+
+            mascotas.add(mascotaActual);
+
+            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_PET_NUMERO_LIKES + ") as likes " +
+                    " FROM " + ConstantesBaseDatos.TABLE_LIKES_PET +
+                    " WHERE " + ConstantesBaseDatos.TABLE_LIKES_PET_ID_MASCOTA + "=" + mascotaActual.getId();
+            Cursor registroLikes = db.rawQuery(queryLikes, null);
+
+            if(registroLikes.moveToNext()){
+                mascotaActual.setLikes(registroLikes.getInt(0));
+            }
+            else {
+                mascotaActual.setLikes(0);
+            }
+        }
+        db.close();
+        return mascotas;
+    }
+
+
 
     public void insertarMascota(ContentValues contentValues){
 
@@ -111,11 +143,10 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     public int obtenerLikesMascota (Mascota mascota){
 
-        int likes = mascota.getLikes();
-
+        int likes = 0;
         String query = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_PET_NUMERO_LIKES+")" +
                 " FROM " + ConstantesBaseDatos.TABLE_LIKES_PET + " WHERE " + ConstantesBaseDatos.TABLE_LIKES_PET_ID_MASCOTA +
-                "=" + mascota.getId();
+                " = " + mascota.getId();
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor registros = db.rawQuery(query, null);

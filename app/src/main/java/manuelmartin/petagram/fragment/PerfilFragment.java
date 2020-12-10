@@ -5,18 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import manuelmartin.petagram.adapter.AdaptadorSnowBall;
+import manuelmartin.petagram.adapter.PerfilAdaptador;
 import manuelmartin.petagram.R;
 import manuelmartin.petagram.SnowBall;
 
@@ -27,8 +25,7 @@ public class PerfilFragment extends Fragment {
 
     private RecyclerView listaPerfil;
     private ArrayList<SnowBall> snowballs = new ArrayList<>();
-
-    public AdaptadorSnowBall adaptadorSnowBall;
+    public PerfilAdaptador perfilAdaptador;
 
 
     @Nullable
@@ -50,8 +47,8 @@ public class PerfilFragment extends Fragment {
 
 
     private void inicializarAdaptadorPerfil (){
-        adaptadorSnowBall = new AdaptadorSnowBall(snowballs);
-        listaPerfil.setAdapter(adaptadorSnowBall);
+        perfilAdaptador = new PerfilAdaptador(snowballs);
+        listaPerfil.setAdapter(perfilAdaptador);
     }
 
     private void inicializarPerfil(){

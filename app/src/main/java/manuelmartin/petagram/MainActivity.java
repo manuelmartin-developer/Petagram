@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import manuelmartin.petagram.adapter.PageAdapter;
 import manuelmartin.petagram.fragment.PerfilFragment;
 import manuelmartin.petagram.fragment.RecyclerViewFragment;
+import manuelmartin.petagram.pojo.Mascota;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
-
-
 
     }
 

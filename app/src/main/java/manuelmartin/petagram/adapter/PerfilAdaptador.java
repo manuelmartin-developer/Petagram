@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import manuelmartin.petagram.R;
 import manuelmartin.petagram.SnowBall;
 
-public class AdaptadorSnowBall extends RecyclerView.Adapter<AdaptadorSnowBall.PerfilViewHolder> {
+public class PerfilAdaptador extends RecyclerView.Adapter<PerfilAdaptador.PerfilViewHolder> {
 
     ArrayList<SnowBall> snowBalls;
 
-    public AdaptadorSnowBall(ArrayList<SnowBall> snowBalls){
+    public PerfilAdaptador(ArrayList<SnowBall> snowBalls){
         this.snowBalls=snowBalls;
     }
 
